@@ -526,7 +526,7 @@ static size_t entropy(void *buf, size_t n)
     #if defined(__linux__) && defined(SYS_getrandom)
     if (syscall(SYS_getrandom, buf, n, 0) == n)
         return n;
-    #elif defined(SYS_getentropy)
+    #elif defined(SYS_getentropy) && (!defined(TARGET_OS_IPHONE) || TARGET_OS_IPHONE == 0)
     if (syscall(SYS_getentropy, buf, n) == 0)
         return n;
     #endif
