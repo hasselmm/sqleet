@@ -376,6 +376,7 @@ static int verify_page1(Pager *pager)
         sqlite3PcacheTruncate(pager->pPCache, 0);
         if ((rc = sqlite3PagerGet(pager, 1, &page, 0)) == SQLITE_OK) {
             /* Validate the read database header */
+sqlite3_log(SQLITE_NOTICE, "SQLITE_NOTADB: %s:%d(%s)", __FILE__, __LINE__, __func__);
             rc = SQLITE_NOTADB;
             if (!memcmp(page->pData, "SQLite format 3", 16)) {
                 unsigned char *data = page->pData;
